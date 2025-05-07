@@ -1,0 +1,83 @@
+/* Base Styles */
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #1f1f1f;
+}
+
+/* Card Styles */
+.card {
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.card-header {
+  background-color: #1f1f1f;
+  border-bottom: 1px solid #333;
+}
+
+.card-body {
+  background-color: #181818;
+}
+
+/* Form Controls */
+.form-control {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  color: #ffffff !important;  /* Force white input text */
+}
+
+.form-control:focus {
+  background-color: #1e1e1e;
+  border-color: #00aaff;
+  box-shadow: none;
+}
+
+/* Placeholder text for inputs */
+.form-control::placeholder {
+  color: #ffffff !important;
+  opacity: 1;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #00aaff;
+  border-color: #00aaff;
+}
+
+.btn-primary:hover {
+  background-color: #0088cc;
+  border-color: #0088cc;
+}
+
+/* List Group (Sidebar) */
+.list-group-item {
+  background-color: #1e1e1e;
+  border: none;
+  color: #e0e0e0;
+  padding: 0.5rem 1rem;
+}
+
+.list-group-item:hover {
+  background-color: #262626;
+}
+
+/* Links */
+a.text-primary {
+  color: #00aaff;
+}
+
+a.text-primary:hover {
+  color: #0088cc;
+}
