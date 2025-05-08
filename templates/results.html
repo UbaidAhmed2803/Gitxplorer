@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container mt-4">
-  <h2 class="text-light text-center mb-4">Search Results</h2>
+  <!-- Navigation Link to easily go back to the search page -->
+  <div class="text-center mb-3">
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Search</a>
+  </div>
+
+  <h2 class="text-light text-center mb-4">GitXplorer Search Results</h2>
+  
   {% for query_state in search_state.queries %}
   <div class="card bg-dark text-light mb-4">
     <div class="card-header">
@@ -29,14 +35,14 @@
   </div>
   {% endfor %}
 
-  {# Use a namespace to accumulate if any query has remaining pages #}
+  {# Use a namespace to accumulate a flag if any query has additional pages available #}
   {% set ns = namespace(more=false) %}
   {% for query_state in search_state.queries %}
-    {% if query_state.current_page < query_state.pages_count %}
-      {% set ns.more = true %}
-    {% endif %}
+      {% if query_state.current_page < query_state.pages_count %}
+         {% set ns.more = true %}
+      {% endif %}
   {% endfor %}
-  
+
   {% if ns.more %}
   <form method="POST" action="{{ url_for('paginate') }}">
     <div class="d-grid gap-2">
