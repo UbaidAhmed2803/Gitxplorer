@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-light text-center mb-4">Search Results</h2>
+  {% for query_state in search_state.queries %}
+  <div class="card bg-dark text-light mb-4">
+    <div class="card-header">
+      <h5>Query: {{ query_state.query }}</h5>
+      <small>Page {{ query_state.current_page }} of {{ query_state.pages_count }}</small>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        {% for item in search_state.results[query_state.query] %}
+        <div class="col-md-4">
+          <div class="card bg-secondary text-light mb-3">
+            <div class="card-body">
+              <h6 class="card-title">
+                <a href="{{ item.html_url }}" class="text-primary text-decoration-none" target="_blank">
+                  {{ item.repository.full_name }}
+                </a>
+              </h6>
+              <p class="card-text">{{ item.path }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {# Use a namespace to accumulate if any query has remaining pages #}
+  {% set ns = namespace(more=false) %}
+  {% for query_state in search_state.queries %}
+    {% if query_state.current_page < query_state.pages_count %}
+      {% set ns.more = true %}
+    {% endif %}
+  {% endfor %}
+  
+  {% if ns.more %}
+  <form method="POST" action="{{ url_for('paginate') }}">
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary">Load Next 5 Pages</button>
+    </div>
+  </form>
+  {% else %}
+  <div class="alert alert-info text-center">No more results available.</div>
+  {% endif %}
+</div>
+{% endblock %}
