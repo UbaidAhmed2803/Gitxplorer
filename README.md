@@ -1,4 +1,4 @@
-# Gitxplorer
+# GitXplorer
 
 A dark-themed Flask application to search for juicy information on GitHub using custom dorks. This tool enables users to select specific dorks (e.g., "Passwords", "API Keys") or provide their own custom keyword. Additionally, it supports searching within a specific repository and paginates results for enhanced usability.
 
