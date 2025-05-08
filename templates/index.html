@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST">
+  <div class="row">
+    <!-- Left Panel: Sidebar for GitHub Dork Toggles -->
+    <aside class="col-md-3">
+      <div class="card bg-secondary text-light mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">GitHub Dorks</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            {% for dork in dorks %}
+            <li class="list-group-item bg-dark border-0">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{ dork }}" id="dork-{{ loop.index }}" name="dorks" checked>
+                <label class="form-check-label" for="dork-{{ loop.index }}">
+                  {{ dork }}
+                </label>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Right Panel: Main Search Form -->
+    <main class="col-md-9">
+      <div class="card bg-dark text-light shadow-sm">
+        <div class="card-header">
+          <h3 class="mb-0">Code Search Settings</h3>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="github_token" class="form-label">GitHub Token</label>
+            <input type="password" class="form-control" id="github_token" name="github_token" value="{{ token }}" required>
+          </div>
+          <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" role="switch" id="enableKeyword" name="enableKeyword">
+            <label class="form-check-label" for="enableKeyword">Enable Custom Keyword</label>
+          </div>
+          <div class="mb-3" id="keywordContainer" style="display: none;">
+            <label for="search_term" class="form-label">Custom Keyword</label>
+            <input type="text" class="form-control" id="search_term" name="search_term" placeholder="Enter keyword">
+          </div>
+          <div class="mb-3">
+            <label for="repo" class="form-label">Specific Repository (Optional)</label>
+            <input type="text" class="form-control" id="repo" name="repo" placeholder="owner/repo">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Start Search</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</form>
+
+<script>
+  // Toggle the custom keyword input field based on checkbox
+  document.getElementById("enableKeyword").addEventListener("change", function() {
+    document.getElementById("keywordContainer").style.display = this.checked ? "block" : "none";
+  });
+</script>
+{% endblock %}
